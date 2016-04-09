@@ -15,8 +15,7 @@
 ;; [X | X <- (2 to sqrt(num), num % X == 0 and is-prime(X)]
 (defn prime-factors
     [num]
-    (filter is-prime?
-            (for [x (range 2 (int (Math/sqrt num)))
-                  :when (= 0 (mod num x))]
-                x)))
+    (let [s (int (Math/sqrt num))]
+        (filter is-prime?
+                (filter  #(= 0 (mod num %)) (range 2 (int (Math/sqrt num)))))))
 
